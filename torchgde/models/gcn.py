@@ -41,7 +41,7 @@ class GCNLayer(nn.Module):
         # normalization by square root of src degree
         h = h * self.g.ndata['norm']
         self.g.ndata['h'] = h
-        self.g.update_all(fn.copy_src(src='h', out='m'),
+        self.g.update_all(fn.copy_u(u='h', out='m'),
                           fn.sum(msg='m', out='h'))
         h = self.g.ndata.pop('h')
         # normalization by square root of dst degree
